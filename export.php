@@ -24,6 +24,7 @@
 
 
       $link = mysql_connect($host,$user,$pass);
+      mysql_set_charset('utf8mb4', $link);
       mysql_select_db($name,$link);
       
       //get all of the tables
@@ -58,8 +59,7 @@
                   $return.= 'INSERT INTO '.$table.' VALUES(';
                   for($j=0; $j < $num_fields; $j++) 
                   {
-                      $row[$j] = addslashes($row[$j]);
-                      $row[$j] = ereg_replace("\n","\\n",$row[$j]);
+                      $row[$j] = mysql_real_escape_string($row[$j], $link);
                       if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
                       if ($j < ($num_fields-1)) { $return.= ','; }
                   }
