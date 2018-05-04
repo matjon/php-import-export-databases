@@ -5,13 +5,15 @@
     public $user = "";
     public $pass = "";
     public $name = "";
+    public $tables = '*';
     
     // Constructor
-    public function __construct($host,$user,$pass,$name){
+    public function __construct($host,$user,$pass,$name, $tables='*'){
       $this->host = $host;
       $this->user = $user;
       $this->pass = $pass;
       $this->name = $name;
+      $this->tables = $tables;
     }
     
     /* backup the db OR just a table */
@@ -20,7 +22,7 @@
       $user = $this->user;
       $pass = $this->pass;
       $name = $this->name;
-      $tables = '*';
+      $tables = $this->tables;
 
 
       $link = mysql_connect($host,$user,$pass);
