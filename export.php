@@ -30,7 +30,7 @@
       mysql_select_db($name,$link);
       
       //get all of the tables
-      if($tables == '*')
+      if($tables === '*')
       {
           $tables = array();
           $result = mysql_query('SHOW TABLES');
