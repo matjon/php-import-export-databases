@@ -55,8 +55,6 @@
           $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
           $return.= "\n\n".$row2[1].";\n\n";
 
-          for ($i = 0; $i < $num_fields; $i++)
-          {
               while($row = mysql_fetch_row($result))
               {
                   $return.= 'INSERT INTO '.$table.' VALUES(';
@@ -68,7 +66,6 @@
                   }
                   $return.= ");\n";
               }
-          }
           $return.="\n\n\n";
       }
 
