@@ -55,17 +55,18 @@
           $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
           $return.= "\n\n".$row2[1].";\n\n";
 
-              while($row = mysql_fetch_row($result))
+          while($row = mysql_fetch_row($result))
+          {
+              $return.= 'INSERT INTO '.$table.' VALUES(';
+              for($j=0; $j < $num_fields; $j++)
               {
-                  $return.= 'INSERT INTO '.$table.' VALUES(';
-                  for($j=0; $j < $num_fields; $j++)
-                  {
-                      $row[$j] = mysql_real_escape_string($row[$j], $link);
-                      if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
-                      if ($j < ($num_fields-1)) { $return.= ','; }
-                  }
-                  $return.= ");\n";
+                  $row[$j] = mysql_real_escape_string($row[$j], $link);
+                  if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+                  if ($j < ($num_fields-1)) { $return.= ','; }
               }
+              $return.= ");\n";
+          }
+
           $return.="\n\n\n";
       }
 
