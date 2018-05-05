@@ -47,6 +47,7 @@
       //cycle through
       foreach($tables as $table)
       {
+          $table = mysql_real_escape_string($table, $link);
           $result = mysql_query('SELECT * FROM '.$table);
           $num_fields = mysql_num_fields($result);
 
