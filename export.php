@@ -61,8 +61,12 @@
               $return.= 'INSERT INTO `'.$table.'` VALUES(';
               for($j=0; $j < $num_fields; $j++)
               {
-                  $row[$j] = mysql_real_escape_string($row[$j], $link);
-                  if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
+                  if (isset($row[$j])) {
+                      $row[$j] = mysql_real_escape_string($row[$j], $link);
+                      $return.= '"'.$row[$j].'"' ;
+                  } else {
+                      $return.= 'NULL';
+                  }
                   if ($j < ($num_fields-1)) { $return.= ','; }
               }
               $return.= ");\n";
